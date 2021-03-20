@@ -60,24 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        // checking valid passwordifield
-        if(passwordfield.getText().toString().matches("") || passwordfield.getText().toString().contains("\\s+")){
-            passworderror.setText("Please enter a valid password");
-        }
-        else{ //if valid
-            passworderror.setText("");
-            allfieldsvalid[0]++;
-        }
-
-        //checking valid repassfield
-        if(repassfield.getText().toString().matches("")){
-            passworderror.setText("Please enter a matching password");
-        }
-        else{
-            passworderror.setText("");
-            allfieldsvalid[0]++;
-        }
-
         //checking phone number field
         if(phonenumberfield.getText().toString().matches("") || phonenumberfield.length() < 10){
             phonenumbererror.setText("Please enter a valid phone number");
@@ -98,35 +80,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //once all criteria has been met
-        if(allfieldsvalid[0] == 5){
-            //if reenter password and password match
-            if(passwordfield.getText().toString().matches(repassfield.getText().toString())) {
+        if(allfieldsvalid[0] == 3){
+            phonenumber = phonenumberfield.getText().toString();
+            aadharnumber = Aadharnumberfield.getText().toString();
 
-                String regex = "^(?=.*[0-9])"             //the regex to match with the entered password
-                        + "(?=.*[a-z])(?=.*[A-Z])"
-                        + "(?=.*[@#$%^&+=])"
-                        + "(?=\\S+$).{8,20}$";
+            Log.i("creds", username + " "+ phonenumber+ " "+ aadharnumber);  //Access creds from here
 
-                String passwordcheck = passwordfield.getText().toString(); //the password entered converted to a string
-                Pattern p = Pattern.compile(regex);
-                Matcher m = p.matcher(passwordcheck);
-
-                if(m.matches()){              //if the password matches the criteria then sign up is successful
-                    passworderror.setText("");     //set error to blank
-                    password = passwordfield.getText().toString();
-                    phonenumber = phonenumberfield.getText().toString();
-                    aadharnumber = Aadharnumberfield.getText().toString();
-                    Log.i("creds", username + " "+ password+ " "+ phonenumber+ " "+ aadharnumber); // HOW TO ACCESS CREDS
-
-                }
-
-                else{              //if the password does not match the criteria
-                    passworderror.setText("The password should be between 8-20 characters long,have a capital number and have atleast one symbol and one number");
-                }
-            }
-            else{            //if the re and password fields dont match
-                passworderror.setText("The passwords don't match..");
-            }
         }
 
 
@@ -158,14 +117,13 @@ public class MainActivity extends AppCompatActivity {
 
         //error textviews
         usernameerror = (TextView) findViewById(R.id.usernameerror);
-        passworderror = (TextView) findViewById(R.id.passworderror);
+
         phonenumbererror = (TextView) findViewById(R.id.phonenumbererror);
 
 
 
         //initializing user creds
         username = "";
-        password = "";
         phonenumber = "";
         aadharnumber = "";
 
@@ -174,8 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
         //user's details fields
         usernamefield = (EditText) findViewById(R.id.usernamefield);
-        passwordfield = (EditText) findViewById(R.id.passwordfield);
-        repassfield = (EditText) findViewById(R.id.reenterpassfield);
         phonenumberfield = (EditText) findViewById(R.id.phonenumberfield);
         Aadharnumberfield = (EditText) findViewById(R.id.aadharnumberfield);
 
@@ -198,16 +154,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //password enter key listener
-        repassfield.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode == event.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN){
-                    signup(v);
-                }
-                return false;
-            }
-        });
+
 
     }
 }
