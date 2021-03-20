@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         Log.i("checkey", Integer.toString(allfieldsvalid[0]));
 
         //checking aadhar number field
-        if(Aadharnumberfield.getText().toString().matches("") || phonenumberfield.length() < 12){
+        if(Aadharnumberfield.getText().toString().matches("") || Aadharnumberfield.length() < 12){
             phonenumbererror.setText("Please enter a valid Aadhar card number");
         }
         else{      //if valid phone number
@@ -116,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     password = passwordfield.getText().toString();
                     phonenumber = phonenumberfield.getText().toString();
                     aadharnumber = Aadharnumberfield.getText().toString();
+                    Log.i("creds", username + " "+ password+ " "+ phonenumber+ " "+ aadharnumber); // HOW TO ACCESS CREDS
 
                 }
 
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         Aadharnumberfield = (EditText) findViewById(R.id.aadharnumberfield);
 
 
-        Log.i("creds", username + " "+ password+ " "+ phonenumber+ " "+ aadharnumber); // HOW TO ACCESS CREDS
+
 
 
         //Setting keyboard to drop if clicked anywhere els
